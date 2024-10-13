@@ -25,10 +25,22 @@ repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 
 notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Notification.lua"))()
 
--- Verifica a versão e carrega o script do Blox Fruits
-if _G.HOHO_PVP_UI or _G.HohoVersion == "v3" then
-    return loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HohoV2/main/BloxFruit/BloxFruitTEST_ONLY.lua"))()
+-- Definindo uma chave permanente
+local permanentKey = "DragonOFICIAL"
+
+-- Função para carregar o script do Blox Fruits com a chave permanente
+local function loadBloxFruits()
+    -- Adicionando a chave permanente como parte do ambiente
+    getgenv().key = permanentKey
+    
+    -- Carregando o script do Blox Fruits
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HohoV2/main/BloxFruit/BloxFruitTEST_ONLY.lua"))()
 end
 
--- Carregando apenas o script do Blox Fruits
-loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HohoV2/main/BloxFruit/BloxFruitTEST_ONLY.lua"))()
+-- Verifica a versão e carrega o script do Blox Fruits
+if _G.HOHO_PVP_UI or _G.HohoVersion == "v3" then
+    return loadBloxFruits()
+end
+
+-- Carregando o script pela primeira vez
+loadBloxFruits()
